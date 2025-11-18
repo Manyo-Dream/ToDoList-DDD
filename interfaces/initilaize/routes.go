@@ -16,7 +16,7 @@ func NewRouter() *gin.Engine {
 
 		// 用户部分
 		v1.POST("user/register", controller.UserRegisterHandler())
-		v1.POST("user/login", controller.UserRegisterHandler())
+		v1.POST("user/login", controller.UserLoginHandler())
 		// 备忘录部分
 	}
 	return r
