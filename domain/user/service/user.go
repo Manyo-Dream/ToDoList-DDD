@@ -6,7 +6,8 @@ import (
 )
 
 type UserDomain interface {
-	UserCreate(ctx *gin.Context, user *entity.User) (*entity.User, error)
+	CreateUser(ctx *gin.Context, user *entity.User) (*entity.User, error)
+	FindUserByName(ctx *gin.Context, name string) (*entity.User, error)
 }
 
 type UserDomainImpl struct{}
@@ -15,6 +16,10 @@ func NewUserDomainImpl() UserDomain {
 	return &UserDomainImpl{}
 }
 
-func (u *UserDomainImpl) UserCreate(ctx *gin.Context, user *entity.User) (*entity.User, error) {
+func (u *UserDomainImpl) CreateUser(ctx *gin.Context, user *entity.User) (*entity.User, error) {
+	return nil, nil
+}
+
+func (u *UserDomainImpl) FindUserByName(ctx *gin.Context, name string) (*entity.User, error) {
 	return nil, nil
 }

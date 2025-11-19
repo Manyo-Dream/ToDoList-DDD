@@ -1,6 +1,7 @@
 package user
 
 import (
+	"errors"
 	"sync"
 
 	"github.com/gin-gonic/gin"
@@ -30,8 +31,18 @@ func NewServiceImpl(srv service.UserDomain) *ServiceImpl {
 	return ServiceImplIns
 }
 
-func (s *ServiceImpl) Register(ctx *gin.Context, user *entity.User) (any, error) {
-	user, err := s.ud.UserCreate(ctx, user)
+func (s *ServiceImpl) Register(ctx *gin.Context, userEntity *entity.User) (any, error) {
+	// 用户名是否重复
+	userExist, err := s.ud.FindUserByName(ctx, userEntity.UserName)
+	if err != nil {
+		return nil, err
+	}
+	if userExist.IsActive() {
+		return nil, errors.New("user is already exsit")
+	}
+
+	// 创建用户
+	user, err := s.ud.CreateUser(ctx, userEntity)
 	if err != nil {
 		return nil, err
 	}
