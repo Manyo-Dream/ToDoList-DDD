@@ -3,6 +3,7 @@ package service
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/manyodream/todolist-ddd/domain/user/entity"
+	"github.com/manyodream/todolist-ddd/domain/user/repository"
 )
 
 type UserDomain interface {
@@ -10,10 +11,13 @@ type UserDomain interface {
 	FindUserByName(ctx *gin.Context, name string) (*entity.User, error)
 }
 
-type UserDomainImpl struct{}
+type UserDomainImpl struct {
+	repo    repository.User
+	encrypt repository.PwdEncrypt
+}
 
-func NewUserDomainImpl() UserDomain {
-	return &UserDomainImpl{}
+func NewUserDomainImpl(repo repository.User, encrypt repository.PwdEncrypt) UserDomain {
+	return &UserDomainImpl{repo: repo, encrypt: encrypt}
 }
 
 func (u *UserDomainImpl) CreateUser(ctx *gin.Context, user *entity.User) (*entity.User, error) {

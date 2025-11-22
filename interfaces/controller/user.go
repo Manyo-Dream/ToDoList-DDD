@@ -10,12 +10,6 @@ import (
 
 func UserRegisterHandler() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-
-	}
-}
-
-func UserLoginHandler() gin.HandlerFunc {
-	return func(ctx *gin.Context) {
 		var req types.UserReq
 		if err := ctx.ShouldBind(&req); err != nil {
 			ctx.JSON(http.StatusOK, types.RespError(err, "user register binding error"))
@@ -29,5 +23,11 @@ func UserLoginHandler() gin.HandlerFunc {
 			ctx.JSON(http.StatusOK, types.RespError(err, "user register error"))
 		}
 		ctx.JSON(http.StatusOK, types.RespSuccessWithData(resp))
+	}
+}
+
+func UserLoginHandler() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+
 	}
 }
