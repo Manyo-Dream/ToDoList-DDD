@@ -1,0 +1,26 @@
+version: '4.52.0 '
+
+networks:
+  todolist:
+    driver: bridge
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=todolist
+      - MYSQL_USER=todolist
+      - MYSQL_PASSWORD=todolist
+      - TZ=Asia/Shanghai
+    ports:
+      - "3307:3306"
+  
+  redis:
+    container_name: redis
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"

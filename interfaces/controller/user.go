@@ -28,6 +28,5 @@ func UserRegisterHandler() gin.HandlerFunc {
 
 func UserLoginHandler() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-
 	}
 }
