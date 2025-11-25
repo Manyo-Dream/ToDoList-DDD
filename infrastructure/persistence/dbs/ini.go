@@ -1,12 +1,12 @@
 package dbs
 
 import (
-	"os/user"
 	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/manyodream/todolist-ddd/conf"
+	"github.com/manyodream/todolist-ddd/infrastructure/persistence/user"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

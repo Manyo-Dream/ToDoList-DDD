@@ -37,8 +37,9 @@ func (s *ServiceImpl) Register(ctx *gin.Context, userEntity *entity.User) (any, 
 	if err != nil {
 		return nil, err
 	}
-	if userExist.IsActive() {
-		return nil, errors.New("user is already exsit")
+
+	if userExist != nil && userExist.IsActive() {
+		return nil, errors.New("user is already exist")
 	}
 
 	// 创建用户

@@ -21,9 +21,9 @@ func NewUserDomainImpl(repo repository.User, encrypt repository.PwdEncrypt) User
 }
 
 func (u *UserDomainImpl) CreateUser(ctx *gin.Context, user *entity.User) (*entity.User, error) {
-	return nil, nil
+	return u.repo.CreateUser(ctx, user)
 }
 
-func (u *UserDomainImpl) FindUserByName(ctx *gin.Context, name string) (*entity.User, error) {
-	return nil, nil
+func (u *UserDomainImpl) FindUserByName(ctx *gin.Context, username string) (*entity.User, error) {
+	return u.repo.GetUserByName(ctx, username)
 }
