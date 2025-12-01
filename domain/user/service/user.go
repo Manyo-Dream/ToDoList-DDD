@@ -12,15 +12,20 @@ type UserDomain interface {
 }
 
 type UserDomainImpl struct {
-	repo    repository.User
-	encrypt repository.PwdEncrypt
+	repo       repository.User
+	PwdEncrypt repository.PwdEncrypt
 }
 
-func NewUserDomainImpl(repo repository.User, encrypt repository.PwdEncrypt) UserDomain {
-	return &UserDomainImpl{repo: repo, encrypt: encrypt}
+func NewUserDomainImpl(repo repository.User, pwd repository.PwdEncrypt) UserDomain {
+	return &UserDomainImpl{repo: repo, PwdEncrypt: pwd}
 }
 
 func (u *UserDomainImpl) CreateUser(ctx *gin.Context, user *entity.User) (*entity.User, error) {
+	encryptPwd, err := u.PwdEncrypt.Encrypt([]byte(user.PassWord))
+	if err != nil {
+		return nil, err
+	}
+	user.SetPwd(encryptPwd)
 	return u.repo.CreateUser(ctx, user)
 }
 

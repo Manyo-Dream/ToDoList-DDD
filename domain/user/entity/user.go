@@ -13,3 +13,8 @@ type User struct {
 func (u *User) IsActive() bool {
 	return u.ID > 0
 }
+
+func (u *User) SetPwd(pwd []byte) {
+	u.PassWord = string(pwd)
+	u.UpdatedAt = time.Now()
+}

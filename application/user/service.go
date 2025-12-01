@@ -47,5 +47,5 @@ func (s *ServiceImpl) Register(ctx *gin.Context, userEntity *entity.User) (any, 
 	if err != nil {
 		return nil, err
 	}
-	return user, nil
+	return RegisterResponse(user), nil
 }
