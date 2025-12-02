@@ -28,5 +28,17 @@ func UserRegisterHandler() gin.HandlerFunc {
 
 func UserLoginHandler() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
+		var req types.UserReq
+		if err := ctx.ShouldBind(&req); err != nil {
+			ctx.JSON(http.StatusOK, types.RespError(err, "user login binding error"))
+			return
+		}
+
+		userEntity := types.UserReq2Entity(&req)
+		resp, err := user.ServiceImplIns.Login(ctx, userEntity)
+		if err != nil {
+			ctx.JSON(http.StatusOK, types.RespError(err, "user login error"))
+		}
+		ctx.JSON(http.StatusOK, types.RespSuccessWithData(resp))
 	}
 }

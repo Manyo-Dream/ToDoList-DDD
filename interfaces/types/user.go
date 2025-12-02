@@ -10,3 +10,8 @@ type UserResp struct {
 	UserName  string `json:"user_name"`
 	CreatedAt int64  `json:"created_at"`
 }
+
+type TokenData struct {
+	User  *UserResp `json:"user"`
+	Token string    `json:"token"`
+}

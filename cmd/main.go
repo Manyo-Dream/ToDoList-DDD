@@ -7,6 +7,12 @@ import (
 	"github.com/manyodream/todolist-ddd/interfaces/initilaize"
 )
 
+func loadingInfra() {
+	conf.InitConfig()
+	dbs.MySQLInit()
+	container.LoadingDomain()
+}
+
 func main() {
 	// 加载配置文件
 	loadingInfra()
@@ -16,10 +22,4 @@ func main() {
 
 	// 启动服务
 	_ = r.Run(conf.Todolist.Server.Port)
-}
-
-func loadingInfra() {
-	conf.InitConfig()
-	dbs.MySQLInit()
-	container.LoadingDomain()
 }

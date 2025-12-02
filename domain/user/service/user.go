@@ -1,6 +1,8 @@
 package service
 
 import (
+	"errors"
+
 	"github.com/gin-gonic/gin"
 	"github.com/manyodream/todolist-ddd/domain/user/entity"
 	"github.com/manyodream/todolist-ddd/domain/user/repository"
@@ -9,6 +11,7 @@ import (
 type UserDomain interface {
 	CreateUser(ctx *gin.Context, user *entity.User) (*entity.User, error)
 	FindUserByName(ctx *gin.Context, name string) (*entity.User, error)
+	CheckPwd(ctx *gin.Context, user *entity.User, pwd string) error
 }
 
 type UserDomainImpl struct {
@@ -31,4 +34,11 @@ func (u *UserDomainImpl) CreateUser(ctx *gin.Context, user *entity.User) (*entit
 
 func (u *UserDomainImpl) FindUserByName(ctx *gin.Context, username string) (*entity.User, error) {
 	return u.repo.GetUserByName(ctx, username)
+}
+
+func (u *UserDomainImpl) CheckPwd(ctx *gin.Context, user *entity.User, pwd string) error {
+	if u.PwdEncrypt.Check([]byte(user.PassWord), []byte(pwd)) {
+		return nil
+	}
+	return errors.New("pwd is error")
 }
