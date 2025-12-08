@@ -10,7 +10,7 @@ import (
 var jwtSecert = []byte("very-secret-jwt")
 
 type Claims struct {
-	ID       uint64 `json:"id"`
+	ID       uint   `json:"id"`
 	Username string `json:"username"`
 	jwt.RegisteredClaims
 }
@@ -31,7 +31,7 @@ func (t *JWTTokenServiceImpl) GenerateToken(ctx context.Context, id int64, usern
 	nowTime := time.Now()
 	expireTime := nowTime.Add(24 * time.Hour)
 	claims := Claims{
-		ID:       uint64(id),
+		ID:       uint(id),
 		Username: username,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(expireTime),

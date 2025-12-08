@@ -3,6 +3,7 @@ package initilaize
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/manyodream/todolist-ddd/interfaces/controller"
+	"github.com/manyodream/todolist-ddd/interfaces/middleware"
 )
 
 func NewRouter() *gin.Engine {
@@ -19,7 +20,7 @@ func NewRouter() *gin.Engine {
 		v1.POST("user/login", controller.UserLoginHandler())
 		// 备忘录部分
 		auth := v1.Group("/task/")
-		auth.Use() //TODO
+		auth.Use(middleware.JWT()) //TODO
 		{
 			auth.POST("create")
 			auth.GET("list")

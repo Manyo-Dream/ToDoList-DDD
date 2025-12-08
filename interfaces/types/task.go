@@ -1,5 +1,15 @@
 package types
 
+type List[T any] struct {
+	Count int64 `json:"count"`
+	Items []T   `json:"items"`
+}
+
+type Pagination struct {
+	Page     int `json:"page"`
+	PageSize int `json:"page_size"`
+}
+
 type TaskResp struct {
 	ID      uint   `json:"id"`
 	Title   string `json:"title" form:"title"`
@@ -13,22 +23,26 @@ type TaskCreateReq struct {
 	Status  int    `json:"status" form:"status"`
 }
 
-type Pagination struct {
-	Page     int `json:"page"`
-	PageSize int `json:"page_size"`
+type TaskListReq struct {
+	Pagination
 }
 
-type TaskList struct {
+type TaskDetailReq struct {
+	ID uint `json:"id" form:"id"`
 }
 
-type TaskDetail struct {
+type TaskUpdateReq struct {
+	ID      uint   `json:"id"`
+	Title   string `json:"title" form:"title"`
+	Content string `json:"content" form:"content"`
+	Status  int    `json:"status" form:"status"`
 }
 
-type TaskUpdate struct {
+type TaskSearchReq struct {
+	Info string `json:"info" form:"info"`
+	Pagination
 }
 
-type TaskSearch struct {
-}
-
-type TaskDetele struct {
+type TaskDeteleReq struct {
+	ID uint `json:"id" form:"id"`
 }
