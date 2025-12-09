@@ -6,8 +6,8 @@ type List[T any] struct {
 }
 
 type Pagination struct {
-	Page     int `json:"page"`
-	PageSize int `json:"page_size"`
+	Page     int `form:"page" json:"page"`
+	PageSize int `form:"page_size" json:"page_size"`
 }
 
 type TaskResp struct {
@@ -43,6 +43,6 @@ type TaskSearchReq struct {
 	Pagination
 }
 
-type TaskDeteleReq struct {
+type TaskDeleteReq struct {
 	ID uint `json:"id" form:"id"`
 }

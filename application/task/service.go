@@ -18,7 +18,7 @@ type Service interface {
 	TaskDetail(ctx context.Context, taskReq *types.TaskDetailReq) (*entity.Task, error)
 	TaskUpdate(ctx context.Context, taskReq *types.TaskUpdateReq) error
 	TaskSearch(ctx context.Context, taskReq *types.TaskSearchReq) (any, error)
-	TaskDetele(ctx context.Context, taskReq *types.TaskDeteleReq) error
+	TaskDetele(ctx context.Context, taskReq *types.TaskDeleteReq) error
 }
 
 type ServiceImpl struct {
@@ -102,7 +102,7 @@ func (s *ServiceImpl) TaskSearch(ctx context.Context, taskReq *types.TaskSearchR
 	return ListResponse(tasks, count), nil
 }
 
-func (s *ServiceImpl) TaskDetele(ctx context.Context, taskReq *types.TaskDeteleReq) error {
+func (s *ServiceImpl) TaskDelete(ctx context.Context, taskReq *types.TaskDeleteReq) error {
 	userInfo, err := ctl.GetUserInfo(ctx)
 	if err != nil {
 		return err

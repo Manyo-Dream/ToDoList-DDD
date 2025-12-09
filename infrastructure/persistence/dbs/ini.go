@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/manyodream/todolist-ddd/conf"
+	"github.com/manyodream/todolist-ddd/infrastructure/persistence/task"
 	"github.com/manyodream/todolist-ddd/infrastructure/persistence/user"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -50,7 +51,8 @@ func MySQLInit() {
 
 func migration() {
 	err := DB.Set("gorm:table_options", "charset=utf8mb4").
-		AutoMigrate(user.User{})
+		AutoMigrate(&user.User{},
+			&task.Task{})
 	if err != nil {
 		return
 	}

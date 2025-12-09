@@ -3,9 +3,9 @@ package task
 import (
 	"context"
 
-	"github.com/manyodream/todolist-ddd/domain/infrastructure/persistence/user"
 	"github.com/manyodream/todolist-ddd/domain/task/entity"
 	"github.com/manyodream/todolist-ddd/domain/task/repository"
+	"github.com/manyodream/todolist-ddd/infrastructure/persistence/user"
 	"github.com/manyodream/todolist-ddd/interfaces/types"
 	"gorm.io/gorm"
 )
@@ -90,7 +90,7 @@ func (r RepositoryImpl) SearchTaskByTid(ctx context.Context, uid uint, keyword s
 	var tasks []*entity.Task
 	var count int64
 	err := r.db.WithContext(ctx).Model(&Task{}).
-		Where("u.id = ?", uid).
+		Where("uid = ?", uid).
 		Where("title LIKE ? OR content LIKE ?", "%"+keyword+"%", "%"+keyword+"%").
 		Count(&count).
 		Scopes(Paginate(p)).

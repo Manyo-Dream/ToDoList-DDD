@@ -22,12 +22,12 @@ func NewRouter() *gin.Engine {
 		auth := v1.Group("/task/")
 		auth.Use(middleware.JWT()) //TODO
 		{
-			auth.POST("create")
-			auth.GET("list")
-			auth.GET("detail")
-			auth.POST("update")
-			auth.POST("search")
-			auth.POST("detele")
+			auth.POST("create", controller.TaskCreateHandler())
+			auth.GET("list", controller.TaskListHandler())
+			auth.GET("detail", controller.TaskDetailHandler())
+			auth.POST("update", controller.TaskUpdateHandler())
+			auth.POST("search", controller.TaskSearchHandler())
+			auth.POST("delete", controller.TaskDeleteHandler())
 		}
 
 	}

@@ -3,7 +3,7 @@ package task
 import (
 	"time"
 
-	"github.com/manyodream/todolist-ddd/domain/infrastructure/persistence/user"
+	"github.com/manyodream/todolist-ddd/infrastructure/persistence/user"
 
 	"github.com/manyodream/todolist-ddd/domain/task/entity"
 )
